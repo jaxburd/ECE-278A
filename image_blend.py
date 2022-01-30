@@ -15,7 +15,7 @@ def blend(filename, levels):
     new_pyr = (imageA_pyr * mask_pyr) + (imageB_pyr * (1 - mask_pyr))
     return laplacian_reconstruct(new_pyr, levels)
 
-result = blend('fruitBlend.png', 5)
+result = blend('fruitBlend.png', 7)
 result = cv2.cvtColor(np.clip(result * 255, 0, 255).astype(np.uint8), cv2.COLOR_BGR2RGB)
 plt.imshow(result)
 plt.show()
