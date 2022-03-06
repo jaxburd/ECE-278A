@@ -46,7 +46,7 @@ def laplacian_pyr(img, levels):
 def blur(img):
     binomial_kernel = np.array([0.0625, 0.25, 0.375, 0.25, 0.0625])
     partial = cv2.filter2D(img, -1, binomial_kernel)
-    return cv2.filter2D(partial, -1, binomial_kernel.transpose())
+    return cv2.filter2D(partial, -1, binomial_kernel.reshape((5, 1)))
 
 
 def laplacian_reconstruct(pyr, level):

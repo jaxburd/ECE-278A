@@ -45,4 +45,3 @@ def _h(x, a):
     elif (abs(x) > 1) & (abs(x) <= 2):
         return a*(abs(x)**3)-(5*a)*(abs(x)**2)+(8*a)*abs(x)-4*a
     return 0
-

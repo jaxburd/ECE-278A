@@ -3,6 +3,7 @@ import cv2
 from laplacian_pyr import gaussian_pyr, laplacian_pyr, laplacian_display
 from image_blend import blend
 import numpy as np
+import pywt
 
 tiger = cv2.imread('./images/tigerc.png')
 tiger = cv2.cvtColor(tiger, cv2.COLOR_BGR2RGB) / 255.0
@@ -50,11 +51,7 @@ st.write('A Gaussian pyramid is constructed by successively decimating an image 
     the desired number of levels is reached. Despite what the name suggests, the decimation blurring kernel used is typically in the \
     form of a binomial distribution. The name orginates from the fact that repeated convolutions of \
     the binomial kernel converges to a gaussian rather than the use of a gaussian kernel.')
-
-# user_upload = st.file_uploader('Upload Image', ['png', 'jpg', 'jpeg'], False, )
-# if user_upload is not None:
-#     ...
-
+# TODO: Provide multiple image options
 gauss_levels = st.slider('Pyramid Levels', 1, 6, 3, key=1)
 st.image(gaussian_pyr(tiger, gauss_levels-1))
 st.subheader('Laplacian Pyramid')
@@ -72,6 +69,7 @@ st.header('Application: Image Blending')
 st.write('One interesting of Laplacian and Gaussian Pyramids is image blending. This Blending techiniques works by blurring together \
     low frequency components of two images while retaining the high frequency features of both. It is a simples procedure that utilizes \
     Laplacian Pyramids of the images and a Gaussian pyramid of the mask image.')
+st.latex(r'''l_k = l_k^A*m_k + l_k^B *(1 - m_k)''')
 mask_extent = st.slider('Extent of Mask', 0, 100, 50)
 mask_index = int(mask_extent / 100 * 512)
 mask = np.zeros((512, 512, 3))
